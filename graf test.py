@@ -33,3 +33,16 @@ for row in dato:
 
 list.sort(dato2)
 plot(dato2, svovel)
+tall = 0
+noe = []
+begrensning = 100
+while tall < begrensning:
+    tall = tall+1
+    noe.append (tall)
+tall = 0
+summen = 0
+while tall < begrensning:
+    summen = summen + noe[tall]
+    tall += 1
+
+print summen
