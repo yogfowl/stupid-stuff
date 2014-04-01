@@ -5,6 +5,12 @@ Created on Mon Mar 31 12:59:55 2014
 @author: Simon
 """
 import time
+def klassen(a, b, c):
+        hitpoint = a
+        damage = b
+        specialaction = c
+        print "you have " + str(hitpoint) + " hitpoints"
+        print "you deal " + str(damage) + " damage"
 alleklasser = ["warrior", "priest", "archer", "jew"]
 
 klasse = raw_input("choose your class:")
@@ -20,32 +26,16 @@ if valgtklasse == "":
 else:
     print "you are a(n) " + valgtklasse
 if valgtklasse == "warrior":
-    hitpoint = 20
-    damage = 5
-    specialaction = 0
-    print "you have " + str(hitpoint) + " hitpoints"
-    print "you deal " + str(damage) + " damage"
+    klassen(20, 5, 0)
     print "your special action is none"
 elif valgtklasse == "priest":
-    hitpoint = 15
-    damage = 7
-    specialaction = 1
-    print "you have " + str(hitpoint) + " hitpoints"
-    print "you deal " + str(damage) + " damage"
+    klassen(15, 7, 1)
     print "your special action is heal"
 elif valgtklasse == "archer":
-    hitpoint = 15
-    damage = 4
-    specialaction = 2
-    print "you have " + str(hitpoint) + " hitpoints"
-    print "you deal " + str(damage) + " damage"
+    klassen(17, 4, 2)
     print "your special action is snipe"
 elif valgtklasse == "jew":
-    hitpoint = 20
-    damage = 20
-    specialaction = 3
-    print "you have " + str(hitpoint) + " hitpoints"
-    print "you deal " + str(damage) + " damage"
+    klassen(20, 20, 3)
     print "your special action is jew jitsu"
 time.sleep(15)
 print "you are in a dark room, in the room there is a door,"
@@ -63,4 +53,4 @@ for kl in alleactions:
 if valgtaction == "":
     print action + " is not a valid action"
 else:
-    print "yout try to" + valgtaction
+    print "you try to" + valgtaction
