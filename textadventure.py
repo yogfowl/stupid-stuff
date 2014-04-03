@@ -8,17 +8,24 @@ import time
 
 class Character:
     name = ""
+    maxHitPoints = 0
     hitPoints = 0
     damage = 0
     specialAction = 0
     specialActionName = ""
+    selected = None
     
-    def opprettMed(self, hp, dmg, sa, saNavn):
+    def startCharacter(self):
+        cs = CharacterSelect()
+        self.selected = cs.opprettCharacter() 
+        return self
+    
+    def opprettMed(self, hp, dmg, sa, saNavn, mx):
         self.hitPoints = hp
         self.damage = dmg
         self.specialAction = sa
         self.specialActionName = saNavn
-        
+        self.maxHitPoints = mx
         print "you have " + str(self.hitPoints) + " hitpoints"
         print "you deal " + str(self.damage) + " damage"
         print "your special action is " + str(self.specialActionName)
@@ -26,6 +33,16 @@ class Character:
 
     def giNavn(self, navnet):
         self.name = navnet
+        
+    def printCharacterInfo(self):
+        print "Name: " +self.name
+        print "Class: " +self.selected.valgtKlasseNavn
+        print "hitpoint: " +self.hitPoint
+        print "damage: " +self.damage
+        print "name: "+self.valgtKlasse.name
+        print "special action: " +self.specialActionName
+        
+        
   
 class CharacterSelect:
     valgtKlasseNavn = ""
@@ -38,6 +55,7 @@ class CharacterSelect:
         self.delUtKlassePoeng()
         self.velgNavn()
         self.delUtKlassePoeng()
+        return self.valgtKlasse
             
     
     def velgKlasse(self):
@@ -58,25 +76,24 @@ class CharacterSelect:
     
     def delUtKlassePoeng(self): 
         if self.valgtKlasseNavn == "warrior":
-            self.valgtKlasse.opprettMed(20, 5, 0, "none")
+            self.valgtKlasse.opprettMed(20, 5, 0, "none", 20)
         
         elif self.valgtKlasseNavn == "priest":
-            self.valgtKlasse.opprettMed(15, 7, 1, "heal")
+            self.valgtKlasse.opprettMed(15, 7, 1, "heal", 15)
         
         elif self.valgtKlasseNavn == "archer":
-            self.valgtKlasse.opprettMed(17, 4, 2, "snipe")
+            self.valgtKlasse.opprettMed(17, 4, 2, "snipe", 17)
         
         elif self.valgtKlasseNavn == "jew":
-            self.valgtKlasse.opprettMed(20, 20, 3, "jew-jitsu")
+            self.valgtKlasse.opprettMed(20, 20, 3, "jew-jitsu", 20)
         else:
             print "Syntax terror!"
             exit
 
         
       
-
-cs = CharacterSelect()
-hero = cs.opprettCharacter()
+chargen = Character()
+hero = chargen.startCharacter()
 
 print "you are in a dark room, in the room there is a door,"
 print "a window, a book shelf, and a lamp"
