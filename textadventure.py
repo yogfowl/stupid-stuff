@@ -15,20 +15,16 @@ class Character:
     specialActionName = ""
     selected = None
     
-    def startCharacter(self):
-        cs = CharacterSelect()
-        self.selected = cs.opprettCharacter() 
-        return self
     
     def opprettMed(self, hp, dmg, sa, saNavn, mx):
-        self.hitPoints = hp
-        self.damage = dmg
-        self.specialAction = sa
-        self.specialActionName = saNavn
-        self.maxHitPoints = mx
-        print "you have " + str(self.hitPoints) + " hitpoints"
-        print "you deal " + str(self.damage) + " damage"
-        print "your special action is " + str(self.specialActionName)
+        hitPoints = hp
+        damage = dmg
+        specialAction = sa
+        specialActionName = saNavn
+        maxHitPoints = mx
+        print "you have " + str(hitPoints) + " hitpoints"
+        print "you deal " + str(damage) + " damage"
+        print "your special action is " + str(specialActionName)
         return self
 
     def giNavn(self, navnet):
@@ -54,7 +50,6 @@ class CharacterSelect:
         self.velgKlasse()
         self.delUtKlassePoeng()
         self.velgNavn()
-        self.delUtKlassePoeng()
         return self.valgtKlasse
             
     
@@ -64,9 +59,9 @@ class CharacterSelect:
             if duSkrev == kl:
                 self.valgtKlasseNavn = duSkrev
                 print "you are a(n) " + self.valgtKlasseNavn
-                return self
+                return 
         print duSkrev + " is not a valid class"
-        return self.velgKlasse()
+        return self.velgKlasse() #rekursjon hvis feil klassenavn
         
     def velgNavn(self):
         duSkrev = raw_input("choose your name: ")
@@ -74,46 +69,37 @@ class CharacterSelect:
         print "your name is " + self.valgtKlasse.name
 
     
-    def delUtKlassePoeng(self): 
-        if self.valgtKlasseNavn == "warrior":
+    def delUtKlassePoeng(self):
+        sa = SpecialAction()
+        if self.valgtKlasseNavn == "warrior":            
             self.valgtKlasse.opprettMed(20, 5, 0, "none", 20)
         
         elif self.valgtKlasseNavn == "priest":
+            sa.create("heal, 0, 5, false, 2")
             self.valgtKlasse.opprettMed(15, 7, 1, "heal", 15)
         
         elif self.valgtKlasseNavn == "archer":
-            self.valgtKlasse.opprettMed(17, 4, 2, "snipe", 17)
+            self.valgtKlasse.opprettMed( 17, 4, 2, "snipe", 17)
         
         elif self.valgtKlasseNavn == "jew":
             self.valgtKlasse.opprettMed(20, 20, 3, "jew-jitsu", 20)
         else:
             print "Syntax terror!"
             exit
-
-        
-      
-chargen = Character()
-hero = chargen.startCharacter()
-
-print "you are in a dark room, in the room there is a door,"
-print "a window, a book shelf, and a lamp"
-alleactions = ["use lamp", "take book", "open window", "open door"]
-
-skrevetAction = raw_input("choose your action: ")
-valgtaction = ""
-
-for action in alleactions:
-    if action == skrevetAction:
-        valgtaction = skrevetAction
-        break
-
-
-
-if valgtaction == "":
-    print action + " is not a valid action"
-else:
-    print "you try to " + valgtaction
-cs.hitpoint -= 5
-
-
-exit()
+            
+class SpecialAction:
+    damage = 0
+    heal = 0
+    instaKill = False
+    waitPeriod = 0
+    name = ""
+    
+    def create(self, name, damage, heal, instaKill, waitPeriod):
+        self.damage = damage
+        self.heal = heal
+        self.instaKill = instaKill
+        self.waitPeriod = waitPeriod
+        self.name = name 
+             
+cs = CharacterSelect()
+hero = cs.opprettCharacter()   
