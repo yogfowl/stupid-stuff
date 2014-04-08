@@ -39,7 +39,7 @@ class Character:
         print "special action: " +self.specialActionName
         
         
-  
+
 class CharacterSelect:
     valgtKlasseNavn = ""
     valgtKlasse = Character()
@@ -99,7 +99,13 @@ class SpecialAction:
         self.heal = heal
         self.instaKill = instaKill
         self.waitPeriod = waitPeriod
-        self.name = name 
-             
+        self.name = name
 cs = CharacterSelect()
 hero = cs.opprettCharacter()   
+
+class place:
+    def placename(self, nm):
+        self.plcname = nm
+    def objects(self, objectname, object1, object2, object3, object4):
+        self.objectname = objectname
+        
